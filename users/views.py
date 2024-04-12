@@ -6,6 +6,7 @@ from rest_framework.routers import DefaultRouter
 
 from users.models import User,UserGroup
 from users.serializers import UserSerializer,UserGroupSerializer
+from product_app.permissions import AllowAdminOnly
 
 
 # Create your views here.
@@ -23,6 +24,16 @@ class UserGroupViewset(ListModelMixin, CreateModelMixin, \
     '''
     queryset = UserGroup.objects.all()
     serializer_class = UserGroupSerializer
+    
+    def get_permissions(self):
+        if self.request.method.upper() in ['HEAD','GET','OPTIONS']:
+            return []
+        if self.request.method.upper() in ['PUT','POST','DELETE','PATCH']:
+            return [AllowAdminOnly()]
+        
+    def get_serializer_class(self):
+        return super().get_serializer_class()
+        
 
 
 

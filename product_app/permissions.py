@@ -5,4 +5,5 @@ class AllowAdminOnly(BasePermission):
     Only Allow Admin users to access
     '''
     def has_permission(self, request, view):
-        return request.user.groups.filter(name='Admin1').exists()
+        
+        return request.user.groups.filter(name = "admin").exists

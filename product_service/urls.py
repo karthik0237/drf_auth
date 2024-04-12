@@ -19,6 +19,7 @@ from django.urls import path,include
 
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from users.views import router as users_router
+from product_app.views import router as product_router
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +28,4 @@ urlpatterns = [
 ]
 
 urlpatterns += users_router.urls
+urlpatterns+= product_router.urls
